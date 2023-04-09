@@ -1,0 +1,12 @@
+"Phrases"
+{
+	"Team Allies"
+	{
+		"en"			"{color:team_allies}Team Allies"
+	}
+	
+	"Team Axis"
+	{
+		"en"			"{color:team_axis}Team Axis"
+	}
+}

@@ -1,0 +1,12 @@
+"Phrases"
+{
+	"Team Red"
+	{
+		"en"			"{color:team_red}Team Red"
+	}
+	
+	"Team Blue"
+	{
+		"en"			"{color:team_blue}Team Blue"
+	}
+}

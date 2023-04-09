@@ -1,0 +1,53 @@
+"Phrases"
+{
+	"Spectators"
+	{
+		"en"			"Spectators"
+	}
+	
+	"Move player"
+	{
+		"en"			"Move player"
+	}
+	
+	"Move player param"
+	{
+		"#format"		"{1:s}"
+		"en"			"Move player: {1}"
+	}
+	
+	"Team param"
+	{
+		"#format"		"{1:s}"
+		"en"			"Team: {1}"
+	}
+	
+	"Moved player"
+	{
+		"#format"		"{1:s},{2:s}"
+		"en"			"Moved{color:team} {1}{color:default} to {2}."
+	}
+	
+	"No access to move players from team"
+	{
+		"#format"		"{1:s}"
+		"en"			"You do not have access to move players from {1}."
+	}
+	
+	"No access to move players to team"
+	{
+		"#format"		"{1:s}"
+		"en"			"You do not have access to move players to {1}."
+	}
+	
+	"Player already on team"
+	{
+		"#format"		"{1:s}"
+		"en"			"This player is already at {1}."
+	}
+	
+	"Invalid team specified"
+	{
+		"en"			"You have specified an invalid team."
+	}
+}

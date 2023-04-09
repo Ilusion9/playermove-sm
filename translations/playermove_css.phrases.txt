@@ -1,0 +1,12 @@
+"Phrases"
+{
+	"Terrorists"
+	{
+		"en"			"{color:team_t}Terrorists"
+	}
+	
+	"Counter-Terrorists"
+	{
+		"en"			"{color:team_ct}Counter-Terrorists"
+	}
+}

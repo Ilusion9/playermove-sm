@@ -1,0 +1,12 @@
+"Phrases"
+{
+	"Terrorists"
+	{
+		"en"			"Terrorists"
+	}
+	
+	"Counter-Terrorists"
+	{
+		"en"			"Counter-Terrorists"
+	}
+}
