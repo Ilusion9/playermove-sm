@@ -79,14 +79,14 @@ public void OnLibraryRemoved(const char[] name)
 	}
 }
 
-public void PlayerMove_OnRenderTeamName(char[] buffer, int maxlen, int client, const char[] identifier)
+public void PlayerMove_OnRenderTeamToClient(int client, const char[] identifier, char[] buffer, int maxlength)
 {
 	if (StrEqual(identifier, "allies", true))
 	{
-		FormatEx(buffer, maxlen, "%T", "Team Allies", client);
+		FormatEx(buffer, maxlength, "%T", "Team Allies", client);
 	}
 	else if (StrEqual(identifier, "axis", true))
 	{
-		FormatEx(buffer, maxlen, "%T", "Team Axis", client);
+		FormatEx(buffer, maxlength, "%T", "Team Axis", client);
 	}
 }

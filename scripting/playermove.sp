@@ -21,7 +21,6 @@ public Plugin myinfo =
 
 #define MAX_ARGS_LENGTH            256
 #define MAX_OVERRIDE_LENGTH        256
-#define MAX_PANEL_LENGTH           256
 #define MAX_TEAM_LENGTH            256
 
 #define TEAM_NONE             0
@@ -50,7 +49,7 @@ enum struct TeamInfo
 int g_PluginFlags;
 ConVar g_Cvar_MoveNoImmunity;
 
-GlobalForward g_Forward_OnRenderTeamName;
+GlobalForward g_Forward_OnRenderTeamToClient;
 GlobalForward g_Forward_OnMoveClient;
 GlobalForward g_Forward_OnClientMoved;
 
@@ -81,7 +80,7 @@ public void OnPluginStart()
 	g_Cvar_MoveNoImmunity = CreateConVar("sm_move_no_immunity", "0", "Ignore immunity rules when moving a player to a different team?", FCVAR_NONE, true, 0.0, true, 1.0);
 	AutoExecConfig(true, "playermove");
 	
-	g_Forward_OnRenderTeamName = CreateGlobalForward("PlayerMove_OnRenderTeamName", ET_Ignore, Param_String, Param_Cell, Param_Cell, Param_String);
+	g_Forward_OnRenderTeamToClient = CreateGlobalForward("PlayerMove_OnRenderTeamToClient", ET_Ignore, Param_Cell, Param_String, Param_String, Param_Cell);
 	g_Forward_OnMoveClient = CreateGlobalForward("PlayerMove_OnMoveClient", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
 	g_Forward_OnClientMoved = CreateGlobalForward("PlayerMove_OnClientMoved", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
 	
@@ -295,19 +294,19 @@ public int Menu_MoveTeam(Menu menu, MenuAction action, int param1, int param2)
 	return 0;
 }
 
-void OnRenderTeamName(char[] buffer, int maxlen, int client, const char[] identifier)
+void OnRenderTeamToClient(int client, const char[] identifier, char[] buffer, int maxlength)
 {
 	if (StrEqual(identifier, "spec", true))
 	{
-		FormatEx(buffer, maxlen, "%T", "Spectators", client);
+		FormatEx(buffer, maxlength, "%T", "Spectators", client);
 		return;
 	}
 	
-	Call_StartForward(g_Forward_OnRenderTeamName);
-	Call_PushStringEx(buffer, maxlen, SM_PARAM_STRING_COPY, SM_PARAM_COPYBACK);
-	Call_PushCell(maxlen);
+	Call_StartForward(g_Forward_OnRenderTeamToClient);
 	Call_PushCell(client);
 	Call_PushString(identifier);
+	Call_PushStringEx(buffer, maxlength, SM_PARAM_STRING_COPY, SM_PARAM_COPYBACK);
+	Call_PushCell(maxlength);
 	Call_Finish();
 }
 
@@ -333,9 +332,9 @@ void DisplayMoveMenu(int client)
 
 void DisplayMoveTeamMenu(int client, int target)
 {
-	char buffer[MAX_PANEL_LENGTH];
-	char targetName[MAX_NAME_LENGTH];
 	char identifier[MAX_IDENTIFIER_LENGTH];
+	char targetName[MAX_NAME_LENGTH];
+	char teamName[MAX_TEAM_LENGTH];
 	
 	Menu menu = new Menu(Menu_MoveTeam);
 	StringMapSnapshot snapshot = g_Map_Teams.Snapshot();
@@ -350,11 +349,11 @@ void DisplayMoveTeamMenu(int client, int target)
 		snapshot.GetKey(i, identifier, sizeof(identifier));
 		g_Map_Teams.GetArray(identifier, teamInfo, sizeof(TeamInfo));
 		
-		strcopy(buffer, sizeof(buffer), teamInfo.name);
-		OnRenderTeamName(buffer, sizeof(buffer), client, identifier);
+		strcopy(teamName, sizeof(teamName), teamInfo.name);
+		OnRenderTeamToClient(client, identifier, teamName, sizeof(teamName));
 		
-		CRemoveTags(buffer, sizeof(buffer));
-		menu.AddItem(identifier, buffer);
+		CRemoveTags(teamName, sizeof(teamName));
+		menu.AddItem(identifier, teamName);
 	}
 	
 	menu.ExitBackButton = true;
@@ -430,7 +429,7 @@ void PerformMove(int client, int target, char[] identifier, ReplySource replySou
 		}
 		
 		strcopy(teamName, sizeof(teamName), teamInfo.name);
-		OnRenderTeamName(teamName, sizeof(teamName), i, identifier);
+		OnRenderTeamToClient(i, identifier, teamName, sizeof(teamName));
 		
 		CSetChatTextParams(target);
 		CShowActivityToTarget(client, i, "[SM]\x04 ", "\x01%t", "Moved player", targetName, teamName);

@@ -77,14 +77,14 @@ public void OnLibraryRemoved(const char[] name)
 	}
 }
 
-public void PlayerMove_OnRenderTeamName(char[] buffer, int maxlen, int client, const char[] identifier)
+public void PlayerMove_OnRenderTeamToClient(int client, const char[] identifier, char[] buffer, int maxlength)
 {
 	if (StrEqual(identifier, "t", true))
 	{
-		FormatEx(buffer, maxlen, "%T", "Terrorists", client);
+		FormatEx(buffer, maxlength, "%T", "Terrorists", client);
 	}
 	else if (StrEqual(identifier, "ct", true))
 	{
-		FormatEx(buffer, maxlen, "%T", "Counter-Terrorists", client);
+		FormatEx(buffer, maxlength, "%T", "Counter-Terrorists", client);
 	}
 }
