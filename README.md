@@ -84,12 +84,12 @@ sm_move_to_spec_access
 /**
  * Called before a team's name is rendered to a client.
  * 
- * @param buffer            Buffer to store the team's name.
- * @param maxlen            Maximum length of the buffer.
- * @param client            Client's index.
+ * @param client            Client's index (0 = server).
  * @param identifier        Team's identifier.
+ * @param buffer            Buffer to store the team's name.
+ * @param maxlength         Maximum length of the buffer.
  */
-forward void PlayerMove_OnRenderTeamName(char[] buffer, int maxlen, int client, const char[] identifier);
+forward void PlayerMove_OnRenderTeamToClient(int client, const char[] identifier, char[] buffer, int maxlength);
 
 /**
  * Called before a client is moved to a different team.
@@ -99,7 +99,7 @@ forward void PlayerMove_OnRenderTeamName(char[] buffer, int maxlen, int client, 
  * @param oldTeam        Client's old team index.
  * @param admin          Admin's index (0 = server).
  */
-forward void PlayerMove_OnMoveClient(int client, int team, int currentTeam, int admin);
+forward void PlayerMove_OnMoveClient(int client, int team, int oldTeam, int admin);
 
 /**
  * Called when a client is moved to a different team.
