@@ -39,7 +39,6 @@ forward void PlayerMove_OnClientMoved(int client, int team, int oldTeam, int adm
  * @param identifier        Team's identifier.
  * @param team              Team's index.
  * @param name              Team's name.
- * @error                   Invalid team identifier.
  */
 native void PlayerMove_AddTeam(const char[] identifier, int team, const char[] name);
 
@@ -47,7 +46,6 @@ native void PlayerMove_AddTeam(const char[] identifier, int team, const char[] n
  * Removes a team from the move command.
  * 
  * @param identifier        Team's identifier.
- * @error                   Invalid team identifier.
  */
 native void PlayerMove_RemoveTeam(const char[] identifier);
 
