@@ -8,22 +8,22 @@ Sourcecolors (include file) - https://github.com/Ilusion9/sourcecolors-inc-sm
 
 # Commands
 ```
-sm_move <name|#userid> <team>
+sm_move <#userid|name> <team>
 ```
 
 ## Commands for CS:GO and CS:S
 ```
-sm_move <name|#userid> <t|ct|spec>
+sm_move <#userid|name> <t|ct|spec>
 ```
 
 ## Commands for DOD:S
 ```
-sm_move <name|#userid> <allies|axis|spec>
+sm_move <#userid|name> <allies|axis|spec>
 ```
 
 ## Commands for HL2:DM and TF2
 ```
-sm_move <name|#userid> <red|blue|spec>
+sm_move <#userid|name> <red|blue|spec>
 ```
 
 # Convars
