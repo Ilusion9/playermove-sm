@@ -518,14 +518,9 @@ int FindTarget_Ex(int client, const char[] target, int flags = 0)
 public any Native_AddTeam(Handle plugin, int numParams)
 {
 	char identifier[MAX_IDENTIFIER_LENGTH];
-	GetNativeString(1, identifier, sizeof(identifier));
-	
-	if (!identifier[0])
-	{
-		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid team identifier \"%s\"", identifier);
-	}
-	
 	char teamName[MAX_TEAM_LENGTH];
+	
+	GetNativeString(1, identifier, sizeof(identifier));
 	GetNativeString(3, teamName, sizeof(teamName));
 	
 	AddTeam(identifier, GetNativeCell(2), teamName);
@@ -536,11 +531,6 @@ public any Native_RemoveTeam(Handle plugin, int numParams)
 {
 	char identifier[MAX_IDENTIFIER_LENGTH];
 	GetNativeString(1, identifier, sizeof(identifier));
-	
-	if (!identifier[0])
-	{
-		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid team identifier \"%s\"", identifier);
-	}
 	
 	g_Map_Teams.Remove(identifier);
 	return 0;
