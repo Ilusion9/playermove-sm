@@ -1,5 +1,4 @@
 #pragma semicolon 1
-#pragma dynamic 8000
 #pragma newdecls required
 
 #include <sourcemod>
