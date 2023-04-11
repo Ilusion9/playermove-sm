@@ -1,6 +1,6 @@
 # Description
 Provides methods of moving players to a different team. 
-You can use natives to add teams for different games. 
+You can use forwards and natives to add teams for different games. 
 The Spectators team is added by default.
 
 # Dependencies
