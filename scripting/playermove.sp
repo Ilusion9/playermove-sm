@@ -73,8 +73,8 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 public void OnPluginStart()
 {
-	LoadTranslations("common.phrases");
 	LoadTranslations("playermove.phrases");
+	LoadTranslations("common.phrases");
 	
 	g_Cvar_MoveNoImmunity = CreateConVar("sm_move_no_immunity", "0", "Ignore immunity rules when moving a player to a different team?", FCVAR_NONE, true, 0.0, true, 1.0);
 	AutoExecConfig(true, "playermove");
