@@ -43,8 +43,8 @@ public void OnPluginStart()
 	
 	if (view_as<bool>(g_PluginFlags & PLUGIN_HAS_PLAYERMOVE_LIBRARY_LOADED))
 	{
-		PlayerMove_AddTeam("allies", TEAM_ALLIES, "Team Allies");
-		PlayerMove_AddTeam("axis", TEAM_AXIS, "Team Axis");
+		PlayerMove_AddTeam("allies", TEAM_ALLIES, "Allies");
+		PlayerMove_AddTeam("axis", TEAM_AXIS, "Axis");
 	}
 }
 
@@ -65,8 +65,8 @@ public void OnLibraryAdded(const char[] name)
 	{
 		g_PluginFlags |= PLUGIN_HAS_PLAYERMOVE_LIBRARY_LOADED;
 		
-		PlayerMove_AddTeam("allies", TEAM_ALLIES, "Team Allies");
-		PlayerMove_AddTeam("axis", TEAM_AXIS, "Team Axis");
+		PlayerMove_AddTeam("allies", TEAM_ALLIES, "Allies");
+		PlayerMove_AddTeam("axis", TEAM_AXIS, "Axis");
 	}
 }
 
@@ -82,10 +82,10 @@ public void PlayerMove_OnRenderTeamToClient(int client, const char[] identifier,
 {
 	if (StrEqual(identifier, "allies", true))
 	{
-		FormatEx(buffer, maxlength, "%T", "Team Allies", client);
+		FormatEx(buffer, maxlength, "%T", "Allies", client);
 	}
 	else if (StrEqual(identifier, "axis", true))
 	{
-		FormatEx(buffer, maxlength, "%T", "Team Axis", client);
+		FormatEx(buffer, maxlength, "%T", "Axis", client);
 	}
 }
