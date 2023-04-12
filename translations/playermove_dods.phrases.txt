@@ -1,12 +1,12 @@
 "Phrases"
 {
-	"Team Allies"
+	"Allies"
 	{
-		"en"			"{color:team_allies}Team Allies"
+		"en"			"{color:team_allies}Allies"
 	}
 	
-	"Team Axis"
+	"Axis"
 	{
-		"en"			"{color:team_axis}Team Axis"
+		"en"			"{color:team_axis}Axis"
 	}
 }
