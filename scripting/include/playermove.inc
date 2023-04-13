@@ -20,8 +20,9 @@ forward void PlayerMove_OnRenderTeamToClient(int client, const char[] identifier
  * @param team           Client's new team index.
  * @param oldTeam        Client's old team index.
  * @param admin          Admin's index (0 = server).
+ * @return               Plugin_Handled to block the move, Plugin_Continue otherwise.
  */
-forward void PlayerMove_OnMoveClient(int client, int team, int oldTeam, int admin);
+forward Action PlayerMove_OnMoveClient(int client, int team, int oldTeam, int admin);
 
 /**
  * Called when a client is moved to a different team.
