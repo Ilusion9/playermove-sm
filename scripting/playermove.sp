@@ -80,7 +80,7 @@ public void OnPluginStart()
 	AutoExecConfig(true, "playermove");
 	
 	g_Forward_OnRenderTeamToClient = CreateGlobalForward("PlayerMove_OnRenderTeamToClient", ET_Ignore, Param_Cell, Param_String, Param_String, Param_Cell);
-	g_Forward_OnMoveClient = CreateGlobalForward("PlayerMove_OnMoveClient", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
+	g_Forward_OnMoveClient = CreateGlobalForward("PlayerMove_OnMoveClient", ET_Event, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
 	g_Forward_OnClientMoved = CreateGlobalForward("PlayerMove_OnClientMoved", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
 	
 	g_Map_Teams = new StringMap();
@@ -407,12 +407,22 @@ void PerformMove(int client, int target, char[] identifier, ReplySource replySou
 		return;
 	}
 	
+	Action result = Plugin_Continue;
+	ReplySource currentSource = SetCmdReplySource(replySource);
+	
 	Call_StartForward(g_Forward_OnMoveClient);
 	Call_PushCell(target);
 	Call_PushCell(teamInfo.team);
 	Call_PushCell(oldTeam);
 	Call_PushCell(client);
-	Call_Finish();
+	Call_Finish(result);
+	
+	SetCmdReplySource(currentSource);
+	
+	if (result == Plugin_Handled || result == Plugin_Stop)
+	{
+		return;
+	}
 	
 	char teamName[MAX_TEAM_LENGTH];
 	char targetName[MAX_NAME_LENGTH];
