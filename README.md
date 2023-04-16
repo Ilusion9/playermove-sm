@@ -13,17 +13,22 @@ sm_move <#userid|name> <team>
 
 ## Commands for CS:GO and CS:S
 ```
-sm_move <#userid|name> <t|ct|spec>
+sm_move <#userid|name> <spec|t|ct>
 ```
 
 ## Commands for DOD:S
 ```
-sm_move <#userid|name> <allies|axis|spec>
+sm_move <#userid|name> <spec|allies|axis>
 ```
 
 ## Commands for HL2:DM and TF2
 ```
-sm_move <#userid|name> <red|blue|spec>
+sm_move <#userid|name> <spec|red|blue>
+```
+
+## Commands for L4D and L4D2
+```
+sm_move <#userid|name> <spec|survivors|infected>
 ```
 
 # Convars
@@ -39,6 +44,10 @@ sm_move_to_<team>_access
 
 ## Overrides for CS:GO and CS:S
 ```
+sm_move_from_spec_access
+sm_move_to_spec_access
+```
+```
 sm_move_from_t_access
 sm_move_to_t_access
 ```
@@ -46,12 +55,12 @@ sm_move_to_t_access
 sm_move_from_ct_access
 sm_move_to_ct_access
 ```
+
+## Overrides for DOD:S
 ```
 sm_move_from_spec_access
 sm_move_to_spec_access
 ```
-
-## Overrides for DOD:S
 ```
 sm_move_from_allies_access
 sm_move_to_allies_access
@@ -60,12 +69,12 @@ sm_move_to_allies_access
 sm_move_from_axis_access
 sm_move_to_axis_access
 ```
+
+## Overrides for HL2:DM and TF2
 ```
 sm_move_from_spec_access
 sm_move_to_spec_access
 ```
-
-## Overrides for HL2:DM and TF2
 ```
 sm_move_from_red_access
 sm_move_to_red_access
@@ -74,9 +83,19 @@ sm_move_to_red_access
 sm_move_from_blue_access
 sm_move_to_blue_access
 ```
+
+## Overrides for L4D and L4D2
 ```
 sm_move_from_spec_access
 sm_move_to_spec_access
+```
+```
+sm_move_from_survivors_access
+sm_move_to_survivors_access
+```
+```
+sm_move_from_infected_access
+sm_move_to_infected_access
 ```
 
 # Forwards
