@@ -1,0 +1,12 @@
+"Phrases"
+{
+	"Survivors"
+	{
+		"en"			"Survivors"
+	}
+	
+	"Infected"
+	{
+		"en"			"Infected"
+	}
+}

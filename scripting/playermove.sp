@@ -150,7 +150,9 @@ public Action Command_Move(int client, int args)
 		}
 		else
 		{
-			ReplyToCommand(client, "[SM] Usage: sm_move <#userid|name> <team>");
+			char buffer[256];
+			GetIdentifiers(buffer, sizeof(buffer), "|");
+			ReplyToCommand(client, "[SM] Usage: sm_move <#userid|name> <%s>", buffer);
 		}
 		
 		return Plugin_Handled;
@@ -164,7 +166,10 @@ public Action Command_Move(int client, int args)
 	int len = BreakString(arguments, argInfo.target, sizeof(ArgInfo::target));
 	if (len == -1)
 	{
-		ReplyToCommand(client, "[SM] Usage: sm_move <#userid|name> <team>");
+		char buffer[256];
+		GetIdentifiers(buffer, sizeof(buffer), "|");
+		ReplyToCommand(client, "[SM] Usage: sm_move <#userid|name> <%s>", buffer);
+		
 		return Plugin_Handled;
 	}
 	
@@ -459,6 +464,30 @@ void PerformMove(int client, int target, char[] identifier, ReplySource replySou
 	Call_Finish();
 }
 
+int GetIdentifiers(char[] buffer, int maxlength, const char[] delimiter)
+{
+	int len;
+	char identifier[MAX_IDENTIFIER_LENGTH];
+	
+	StringMapSnapshot snapshot = g_Map_Teams.Snapshot();
+	
+	for (int i = 0; i < snapshot.Length; i++)
+	{
+		snapshot.GetKey(i, identifier, sizeof(identifier));
+		if (len)
+		{
+			len = Format(buffer, maxlength, "%s%s%s", buffer, delimiter, identifier);
+		}
+		else
+		{
+			len = strcopy(buffer, maxlength, identifier);
+		}
+	}
+	
+	delete snapshot;
+	return len;
+}
+
 void CShowActivityToTarget(int client, int target, const char[] tag, const char[] format, any ...)
 {
 	int author;
@@ -527,9 +556,14 @@ int FindTarget_Ex(int client, const char[] target, int flags = 0)
 public any Native_AddTeam(Handle plugin, int numParams)
 {
 	char identifier[MAX_IDENTIFIER_LENGTH];
-	char teamName[MAX_TEAM_LENGTH];
-	
 	GetNativeString(1, identifier, sizeof(identifier));
+	
+	if (StrEqual(identifier, "spec", true))
+	{
+		return 0;
+	}
+	
+	char teamName[MAX_TEAM_LENGTH];
 	GetNativeString(3, teamName, sizeof(teamName));
 	
 	AddTeam(identifier, GetNativeCell(2), teamName);
@@ -540,6 +574,11 @@ public any Native_RemoveTeam(Handle plugin, int numParams)
 {
 	char identifier[MAX_IDENTIFIER_LENGTH];
 	GetNativeString(1, identifier, sizeof(identifier));
+	
+	if (StrEqual(identifier, "spec", true))
+	{
+		return 0;
+	}
 	
 	g_Map_Teams.Remove(identifier);
 	return 0;
